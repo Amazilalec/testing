@@ -40,5 +40,10 @@ public class ProductoService {
 			productoRepository.save(producto);
 		}
 	}
-
+	public List<Producto> buscarPorCategoria(String categoria){
+		return productoRepository.findByCategoria(categoria);
+	}
+	public List<Producto> buscarPorNombre(String nombre){
+		return productoRepository.findByNombre(nombre);
+	}
 }

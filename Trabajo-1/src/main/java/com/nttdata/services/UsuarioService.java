@@ -46,6 +46,10 @@ public void updateUsuario(@Valid Usuario usuario) {
 	if(usuarioRepository.existsById(usuario.getId())) {
 		usuarioRepository.save(usuario);
 	}
-	
 }
+public long obtenerIndentificador(@Valid Usuario usuario) {
+	long temporal;
+	temporal = usuario.getId();
+	return temporal;
+	}	
 }

@@ -1,4 +1,6 @@
 package com.nttdata.controllers;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,16 +8,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import javax.validation.Valid;
+
 import com.nttdata.models.Venta;
+import com.nttdata.services.ProductoService;
 import com.nttdata.services.VentaService;
 @Controller
 @RequestMapping("/ventas")
 public class VentaController {
 @Autowired
 VentaService ventaService;
+@Autowired
+ProductoService productoService;
 @RequestMapping("")
 public String Venta(@ModelAttribute("venta") Venta venta, Model model){
 	model.addAttribute("listaventas", ventaService.obtenerListaVentas());

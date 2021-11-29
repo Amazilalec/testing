@@ -1,7 +1,5 @@
 package com.nttdata.controllers;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +9,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nttdata.models.Carrito;
 import com.nttdata.models.Usuario;
+import com.nttdata.services.CarritoService;
 import com.nttdata.services.UsuarioService;
 
 
@@ -23,6 +22,8 @@ import com.nttdata.services.UsuarioService;
 public class UsuariosController {
 	@Autowired
 	UsuarioService usuarioService;
+	@Autowired
+	CarritoService carritoService;
 
 	@RequestMapping("")
 	public String usuario(@ModelAttribute("usuario") Usuario usuario, Model model) {
@@ -34,7 +35,13 @@ public class UsuariosController {
 	{
 		System.out.println(usuario.getNombre()+" "+usuario.getApellido()+" "+usuario.getLimite()+" "+usuario.getCodigoPostal()); 
 		usuarioService.insertarUsuario(usuario);
-		
+		if(usuario.getCarrito() == null) {
+			Carrito carrito = new Carrito();
+			carrito.setUsuario(usuario);
+			usuario.setCarrito(carrito);
+			carritoService.insertarCarrito(carrito);
+			usuarioService.insertarUsuario(usuario);
+		}
 		
 		return "redirect:/usuarios";
 		

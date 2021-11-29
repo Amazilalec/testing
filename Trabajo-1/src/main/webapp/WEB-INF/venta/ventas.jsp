@@ -10,6 +10,7 @@
     <title>Productos</title>
 </head>
 <body>
+<jsp:include page='../template/navbar.jsp'/>
     <div class="container">
 
         <form:form method="post" action="/ventas/login" modelAttribute="venta">
@@ -40,14 +41,14 @@
   			<c:forEach items="${listaventas}" var='venta'>
    			<tr>
       			<th scope="row">${venta.getId()}</th>
-      			<td>${venta.getTotal()}</td>
+      			<td>${venta.producto.getPrecio()}</td>
       			<td>${venta.getDetalle()}</td>
       			<td>${venta.getFecha()}</td>
       			<td>
       			<a href="/ventas/${venta.getId()}/editar" class="btn btn-primary" role="button" data-bs-toggle="button">Modificar</a>
       			<form action="/ventas/eliminar" method="get">
       				<input type="hidden" name="id" value="${venta.getId()}">
-      				<input type="submit" value="X">
+      				<input type="submit" value="Eliminar">
       			</form>
       			</td>
     		</tr>

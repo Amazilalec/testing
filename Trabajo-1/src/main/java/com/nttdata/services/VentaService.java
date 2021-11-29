@@ -1,9 +1,13 @@
 package com.nttdata.services;
 import java.util.List;
+import java.util.Vector;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.validation.Valid;
+
+import com.nttdata.models.Producto;
 import com.nttdata.models.Venta;
 import com.nttdata.repository.VentaRepository;
 @Service
@@ -34,5 +38,9 @@ public class VentaService {
 		// TODO Auto-generated method stub
 		if(ventaRepository.existsById(venta.getId()))ventaRepository.save(venta);
 	}
-
+	public void agregarProducto(Producto producto, Venta venta) {
+		List temp = new Vector<Object>();
+		temp.add(producto);
+		venta.setProductos(temp);
+	}
 }
