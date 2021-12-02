@@ -8,5 +8,10 @@ import com.nttdata.models.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+	//spring reconoce automaticamente los find si estas buen escritos
+	Usuario findByEmail(String email);
+	Usuario findByNombre(String nombre);
+	
 	List<Usuario> findAll();
+	
 }

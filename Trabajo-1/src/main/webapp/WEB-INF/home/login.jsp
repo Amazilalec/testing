@@ -3,21 +3,25 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <jsp:include page='../template/header.jsp'/>
+
 <body>
 	<div class="container">
-		<form:form method="post" action="/usuarios" modelAttribute="usuario">
-			<input type="hidden" name="_method" value="put">
-			<form:label path="nombreUsuario" class="col-sm-2 col-form-label">Nombre de usuario:</form:label>
-			<form:input type="text" path="nombreUsuario" class="form-control"/>
+	<h1>Login</h1>
+			<hr>
+	<h2>Ingreso al sistema</h2>
+	
+		<form action="/usuarios/login" method="get">
+			<label for="username">Email:</label>
+			<input type="text" class="form-control" name="username" placeholder="Ingresa tu email">
 			<br>
-			<form:label path="password" class="col-sm-2 col-form-label">Password:</form:label>
-			<form:input type="text" path="password" class="form-control"/>
+			<label for="password">Password:</label>
+			<input type="password" class="form-control" name="password" placeholder="Ingresa tu password">
 			<br>
-			<a href="" class="btn btn-success" role="button" data-bs-toggle="button">Volver</a>
-			<input class="btn btn-warning" type="submit" value="Login">
-
-		</form:form>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
+			<input type="submit" class="btn btn-primary" value= "Ingresar">
+		</form>
 	</div>
+	<jsp:include page='../template/footer.jsp'/>
 </body>
 
 </html>
